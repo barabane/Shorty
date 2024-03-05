@@ -7,6 +7,6 @@ class User(BaseModel):
     __tablename__ = "user"
 
     id: Mapped[uuid_pk]
-    email: Mapped[str] = mapped_column(VARCHAR(100))
+    email: Mapped[str] = mapped_column(VARCHAR(100), unique=True)
     password: Mapped[str] = mapped_column(VARCHAR(100))
     reg_at: Mapped[time_now]

@@ -1,0 +1,23 @@
+{% extends "base.html"%}
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+{% endblock %}
+{% block title %}Главная{% endblock %}
+{% block content %}
+<div class="container">
+  <hgroup class="text-center mt-3">
+    <h2>Shorty 🔗</h2>
+    <p><i></i></p>
+  </hgroup>
+  <form>
+    <fieldset class="mb-5" role="group">
+      <input name="url" type="url" placeholder="Вставьте ссылку" autocomplete="url"/>
+      <input type="submit" value="Сократить"/>
+    </fieldset>
+    <div class="link-list">
+      {% include "components/link.html"%}
+    </div>
+  </form>
+</div>
+{% endblock %}

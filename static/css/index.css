@@ -1,0 +1,48 @@
+a {
+    text-decoration: none;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.mt-3 {
+    margin-top: 30px;
+}
+
+.mb-5 {
+    margin-bottom: 50px;
+}
+
+.mb-0 {
+    margin-bottom: 0px;
+}
+
+.ml-auto {
+    margin-left: auto;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.color-danger {
+}
+
+.border-none {
+    border: none;
+}
+
+.link-button__icon {
+    width: 32px;
+    height: 32px;
+    stroke: #919191;
+}
+
+.link-button__icon:hover {
+    stroke: #3B3B3B;
+}

@@ -1,6 +1,7 @@
-from models.BaseModel import BaseModel, uuid_pk, time_now
-from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy import Text, VARCHAR, ForeignKey
+from sqlalchemy.orm import Mapped, mapped_column
+
+from models.BaseModel import BaseModel, uuid_pk, time_now
 
 
 class URL(BaseModel):

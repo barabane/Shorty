@@ -1,7 +1,8 @@
-from models.BaseModel import BaseModel, uuid_pk, time_now
-from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy import VARCHAR, Text
+from sqlalchemy import VARCHAR
 from sqlalchemy.dialects.mysql import LONGTEXT
+from sqlalchemy.orm import Mapped, mapped_column
+
+from models.BaseModel import BaseModel, uuid_pk, time_now
 
 
 class User(BaseModel):

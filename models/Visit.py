@@ -1,6 +1,7 @@
-from models.BaseModel import BaseModel, time_now
-from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy import ForeignKey, VARCHAR, INTEGER
+from sqlalchemy.orm import Mapped, mapped_column
+
+from models.BaseModel import BaseModel, time_now
 
 
 class Visit(BaseModel):

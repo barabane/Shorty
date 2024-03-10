@@ -1,14 +1,15 @@
 import uuid
 from os import environ
+
 from dotenv import load_dotenv
-from werkzeug.security import generate_password_hash
 from sqlalchemy import select
-from sqlalchemy.orm import sessionmaker
 from sqlalchemy.engine import create_engine
+from sqlalchemy.orm import sessionmaker
+from werkzeug.security import generate_password_hash
 
 from models.BaseModel import BaseModel
-from models.User import User
 from models.URL import URL
+from models.User import User
 from models.Visit import Visit
 
 load_dotenv()

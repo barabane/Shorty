@@ -1,9 +1,11 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, redirect, url_for
+from flask_login import current_user
+from db import db
 
 url = Blueprint(name="url", url_prefix="/url/", import_name="url")
 
 
 @url.route('/create', methods=["POST"])
 def create_url_handler():
-    print(request.form.get('url'))
-    return 'hi'
+    db.create_url(full_url=request.form.get('url'), user_id=current_user.id)
+    return redirect(url_for('main.index_handler'))

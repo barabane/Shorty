@@ -32,10 +32,13 @@ class DataBase:
         # self.metadata.drop_all(bind=self.engine)
 
     def get_user_by_email(self, email: str):
-        return self.session.execute(select(User).where(User.email == email))
+        return self.session.scalar(select(User).where(User.email == email))
+
+    def get_user_by_id(self, user_id):
+        return self.session.get(User, user_id)
 
     def register_user(self, email: str, password: str):
-        is_exists = self.get_user_by_email(email).scalar()
+        is_exists = self.get_user_by_email(email)
 
         if is_exists:
             return False

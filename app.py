@@ -1,20 +1,16 @@
 import os
 
-from flask import Flask, render_template
+from flask import Flask
 from flask_login import LoginManager
+
+from blueprints.auth_blueprint import auth as auth_blueprint
+from blueprints.main_blueprint import main as main_blueprint
+from blueprints.url_blueprint import url as url_blueprint
 from db import db
 
-from blueprints.url_blueprint import url as url_blueprint
-
 app = Flask(__name__, template_folder='static')
-app.secret_key = os.getenv('SECRET_KEY')
 
 login_manager = LoginManager()
-
-
-@app.route('/', methods=["GET"])
-def index_handler():
-    return render_template("index.html")
 
 
 @login_manager.user_loader
@@ -23,7 +19,12 @@ def user_loader_handler(user_id):
 
 
 if __name__ == "__main__":
+    app.config['WTF_CSRF_SECRET_KEY '] = True
+    app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
+
     app.register_blueprint(url_blueprint)
+    app.register_blueprint(auth_blueprint)
+    app.register_blueprint(main_blueprint)
     login_manager.init_app(app=app)
 
     app.run()

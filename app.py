@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask
+from flask import Flask, redirect, url_for, flash
 from flask_login import LoginManager
 
 from blueprints.auth_blueprint import auth as auth_blueprint
@@ -16,6 +16,12 @@ login_manager = LoginManager()
 @login_manager.user_loader
 def user_loader_handler(user_id):
     return db.get_user_by_id(user_id=user_id)
+
+
+@login_manager.unauthorized_handler
+def unauthorized():
+    flash('Для начала вам нужно авторизоваться', category='error')
+    return redirect(url_for('main.index_handler'))
 
 
 if __name__ == "__main__":

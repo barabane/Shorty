@@ -16,8 +16,17 @@
       <input type="submit" value="Сократить"/>
     </fieldset>
     <div class="link-list">
-      {% include "components/link.html"%}
+      {% if urls %}
+      {% for url in urls %}
+      {% include "components/url.html"%}
+      {% endfor %}
+      {% endif %}
     </div>
   </form>
+  {% for message in get_flashed_messages()%}
+  <small style="color:#EE402E">
+    {{ message }}
+  </small>
+  {% endfor %}
 </div>
 {% endblock %}

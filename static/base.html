@@ -6,7 +6,6 @@
   <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
-  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
   <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
@@ -19,8 +18,8 @@
   {% endblock %}
 </head>
 <body>
+{% include "components/nav.html"%}
 {% block content %}
 {% endblock %}
 </body>
-<script src="{{ url_for('static', filename='js/modal.js') }}"></script>
 </html>

@@ -1,0 +1,71 @@
+{% extends "base.html"%}
+{% block content%}
+<div class="container">
+  <h2>Профиль</h2>
+  <form method="POST">
+    {{ form.csrf_token }}
+    <fieldset>
+      <label>
+        {{ form.email.label }}
+        <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            autocomplete="email"
+            {% if form.email.errors or get_flashed_messages() %}
+            aria-invalid="true"
+            {% else %}
+            aria-invalid=""
+            {% endif %}
+            aria-describedby="invalid-email"
+        />
+        {% for error in form.email.errors %}
+        <small id="invalid-email">
+          {{ error }}
+        </small>
+        {% endfor %}
+      </label>
+      <label>
+        {{ form.password.label }}
+        <input
+            type="password"
+            name="password"
+            placeholder="Пароль"
+            autocomplete="password"
+            {% if form.password.errors or get_flashed_messages() %}
+            aria-invalid="true"
+            {% else %}
+            aria-invalid=""
+            {% endif %}
+            aria-describedby="invalid-pass"
+        />
+        {% for error in form.password.errors %}
+        <small id="invalid-pass">
+          {{ error }}
+        </small>
+        {% endfor %}
+      </label>
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+      {% for message in messages %}
+      <small style="color:#EE402E">
+        {{ message }}
+      </small>
+      {% endfor %}
+      {% endif %}
+      {% endwith %}
+      {% block body %}{% endblock %}
+    </fieldset>
+    <input
+        type="submit"
+        formaction="/auth/signin"
+        value="Войти"
+    />
+    <input
+        type="submit"
+        formaction="/auth/signup"
+        value="Зарегистрироваться"
+    />
+  </form>
+</div>
+{% endblock %}

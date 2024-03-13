@@ -1,4 +1,5 @@
 from flask import Blueprint, redirect, url_for, render_template, flash
+from flask_login import login_user
 from werkzeug.security import check_password_hash
 
 from db import db
@@ -23,7 +24,8 @@ def signin_handler():
         if not check_password_hash(pwhash=user.password, password=password):
             flash(message='Неправильный логин/пароль', category='error')
             return render_template('auth.html', form=form)
-        return redirect(url_for('index_handler'))
+        login_user(user=user, remember=True)
+        return redirect(url_for('main.index_handler'))
     return render_template('auth.html', form=form)
 
 
@@ -41,5 +43,6 @@ def signup_handler():
             return render_template('auth.html', form=form)
 
         db.register_user(email=email, password=password)
-        return redirect(url_for('index_handler'))
+        login_user(user=user_exists, remember=True)
+        return redirect(url_for('main.index_handler'))
     return render_template('auth.html', form=form)

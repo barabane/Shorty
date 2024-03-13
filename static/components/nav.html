@@ -4,7 +4,20 @@
       <li><strong><a href="/">Shorty</a></strong></li>
     </ul>
     <ul>
+      {% if current_user.is_authenticated %}
+      <li>
+        <details class="dropdown">
+          <summary>
+            {{ current_user.email }}
+          </summary>
+          <ul dir="rtl">
+            <li><a href="/auth/logout">Выйти</a></li>
+          </ul>
+        </details>
+      </li>
+      {% else %}
       <li><a href="/auth">Аккаунт</a></li>
+      {% endif %}
     </ul>
   </nav>
 </div>

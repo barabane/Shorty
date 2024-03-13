@@ -1,5 +1,5 @@
 from flask import Blueprint, redirect, url_for, render_template, flash
-from flask_login import login_user
+from flask_login import login_user, logout_user
 from werkzeug.security import check_password_hash
 
 from db import db
@@ -46,3 +46,9 @@ def signup_handler():
         login_user(user=user_exists, remember=True)
         return redirect(url_for('main.index_handler'))
     return render_template('auth.html', form=form)
+
+
+@auth.route('/logout')
+def logout_handler():
+    logout_user()
+    return redirect(url_for('main.index_handler'))

@@ -25,11 +25,11 @@ class DataBase:
 
     def __init__(self):
         self.engine = create_engine(
-            f"mysql+pymysql://{environ.get('DB_USER')}:{environ.get('DB_PASS')}@{environ.get('DB_HOST')}/{environ.get('DB_NAME')}?charset=utf8mb4")
+            f"mysql+pymysql://{environ.get('DB_USER')}:{environ.get('DB_PASS')}@{environ.get('DB_HOST')}:"
+            f"{environ.get('DB_PORT')}/{environ.get('DB_NAME')}?charset=utf8mb4")
         self.metadata = BaseModel.metadata
         self.session = sessionmaker(bind=self.engine)()
         self.metadata.create_all(bind=self.engine)
-        # self.metadata.drop_all(bind=self.engine)
 
     def get_user_by_email(self, email: str):
         return self.session.scalar(select(User).where(User.email == email))
@@ -55,7 +55,7 @@ class DataBase:
 
     @staticmethod
     def _generate_short_url():
-        return f"https://shrt.ru/{str(uuid.uuid4())[0:6]}"
+        return f"{environ.get('DOMEN')}/fp{str(uuid.uuid4())[0:4]}"
 
     def create_url(self, user_id: str, full_url: str):
         new_url = URL(
@@ -75,9 +75,18 @@ class DataBase:
     def get_url(self, url_id: str):
         return self.session.get(URL, url_id)
 
+    def get_url_by_path(self, short_path: str):
+        return self.session.scalar(select(URL).where(URL.short_path == short_path))
+
     def get_url_stats(self, url_id: str):
         return self.session.scalars(select(Visit).where(Visit.url_id == url_id)).all()
 
+    def add_visit(self, url_id: str, visit_ip: str):
+        self.session.add(Visit(
+            url_id=url_id,
+            visit_ip=visit_ip
+        ))
+        self.session.commit()
+
 
 db = DataBase()
-db.get_url_stats('9f0019a5-47cb-4594-851e-e673e66651e0')

@@ -1,7 +1,12 @@
+from os import environ
+
+from dotenv import load_dotenv
 from flask import Blueprint, render_template, redirect, request
 from flask_login import current_user
 
 from db import db
+
+load_dotenv()
 
 main = Blueprint(name="main", import_name='main')
 
@@ -16,7 +21,7 @@ def index_handler():
 
 @main.route("/<regex('^fp.+'):url_id>")
 def url_handler(url_id):
-    url = db.get_url_by_path(short_path='http://127.0.0.1:5000/' + url_id)
+    url = db.get_url_by_path(short_path=f"{environ.get('DOMEN')}/" + url_id)
     db.add_visit(url_id=url.id, visit_ip=request.remote_addr)
 
     return redirect(url.full_path)

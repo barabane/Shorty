@@ -1,16 +1,23 @@
 import os
 
+import flask
 from flask import Flask, redirect, url_for, flash
 from flask_login import LoginManager
 
 from blueprints.auth_blueprint import auth as auth_blueprint
 from blueprints.main_blueprint import main as main_blueprint
 from blueprints.url_blueprint import url as url_blueprint
+from converters.regexp_converter import RegexConverter
 from db import db
 
 app = Flask(__name__, template_folder='static')
 
 login_manager = LoginManager()
+
+
+@app.before_request
+def func():
+    print(flask.session)
 
 
 @login_manager.user_loader
@@ -28,6 +35,7 @@ if __name__ == "__main__":
     app.config['WTF_CSRF_SECRET_KEY '] = True
     app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 
+    app.url_map.converters['regex'] = RegexConverter
     app.register_blueprint(url_blueprint)
     app.register_blueprint(auth_blueprint)
     app.register_blueprint(main_blueprint)

@@ -1,6 +1,5 @@
 import os
 
-import flask
 from flask import Flask, redirect, url_for, flash
 from flask_login import LoginManager
 
@@ -13,11 +12,6 @@ from db import db
 app = Flask(__name__, template_folder='static')
 
 login_manager = LoginManager()
-
-
-@app.before_request
-def func():
-    print(flask.session)
 
 
 @login_manager.user_loader

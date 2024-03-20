@@ -1,8 +1,7 @@
+from flask_login import UserMixin
 from sqlalchemy import VARCHAR
 from sqlalchemy.dialects.mysql import LONGTEXT
 from sqlalchemy.orm import Mapped, mapped_column
-
-from flask_login import UserMixin
 
 from models.BaseModel import BaseModel, uuid_pk, time_now
 

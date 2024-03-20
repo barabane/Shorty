@@ -42,8 +42,8 @@ def signup_handler():
             flash(message='Такой пользователь уже существует', category='error')
             return render_template('auth.html', form=form)
 
-        db.register_user(email=email, password=password)
-        login_user(user=user_exists, remember=True)
+        new_user = db.register_user(email=email, password=password)
+        login_user(user=new_user, remember=True)
         return redirect(url_for('main.index_handler'))
     return render_template('auth.html', form=form)
 

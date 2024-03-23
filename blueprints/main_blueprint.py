@@ -22,6 +22,7 @@ def index_handler():
 @main.route("/<regex('^fp.+'):url_id>")
 def url_handler(url_id):
     url = db.get_url_by_path(short_path=f"{environ.get('DOMEN')}/" + url_id)
-    db.add_visit(url_id=url.id, visit_ip=request.remote_addr)
+    visit_ip = request.headers.get("X-Forwarded-For", request.remote_addr)
+    db.add_visit(url_id=url.id, visit_ip=visit_ip)
 
     return redirect(url.full_path)

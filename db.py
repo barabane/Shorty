@@ -69,8 +69,15 @@ class DataBase:
 
         return new_url
 
+    def delete_url(self, url_id: int):
+        self.session.delete(self.session.get(URL, url_id))
+        self.session.commit()
+
     def get_user_urls(self, user_id: str):
         return self.session.scalars(select(URL).where(URL.user_id == user_id)).all()
+
+    def get_user_url(self, user_id: str, url_id: int):
+        return self.session.scalar(select(URL).where(URL.id == url_id).where(URL.user_id == user_id))
 
     def get_url(self, url_id: str):
         return self.session.get(URL, url_id)

@@ -1,5 +1,5 @@
 from sqlalchemy import Text, VARCHAR, ForeignKey, INTEGER
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from models.BaseModel import BaseModel, time_now
 
@@ -13,3 +13,8 @@ class URL(BaseModel):
     short_path: Mapped[str] = mapped_column(VARCHAR(50), unique=True)
     created_at: Mapped[time_now]
     updated_at: Mapped[time_now]
+
+    visits = relationship(
+        'Visit',
+        cascade='save-update, merge, delete'
+    )

@@ -22,7 +22,8 @@ def index_handler():
 @main.route("/<regex('^fp.+'):url_id>")
 def url_handler(url_id):
     url = db.get_url_by_path(short_path=f"{environ.get('DOMEN')}/" + url_id)
-    visit_ip = request.headers.get("X-Forwarded-For", request.remote_addr)
-    db.add_visit(url_id=url.id, visit_ip=visit_ip)
-
-    return redirect(url.full_path)
+    if url:
+        visit_ip = request.headers.get("X-Real-IP", request.remote_addr)
+        db.add_visit(url_id=url.id, visit_ip=visit_ip)
+        return redirect(url.full_path)
+    return render_template('404.html'), 404

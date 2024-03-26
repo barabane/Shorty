@@ -3,17 +3,17 @@
 {{ super() }}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
 {% endblock %}
-{% block title %}Главная{% endblock %}
 {% block content %}
+{% include "components/nav.html"%}
 <div class="container">
   <hgroup class="text-center mt-3">
     <h2>Shorty 🔗</h2>
-    <p><i></i></p>
+    <p>Простой. Понятный. Бесплатный.</p>
   </hgroup>
   <form action="/url/create" method="POST">
     <fieldset class="mb-5" role="group">
       <input name="url" type="url" placeholder="Введите ссылку" autocomplete="url"/>
-      <input type="submit" value="Сократить"/>
+      <input type="submit" value="✂️"/>
     </fieldset>
     <div class="link-list">
       {% if urls %}

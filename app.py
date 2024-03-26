@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask
+from flask import Flask, render_template
 
 from blueprints.auth_blueprint import auth as auth_blueprint
 from blueprints.main_blueprint import main as main_blueprint
@@ -18,5 +18,11 @@ app.register_blueprint(auth_blueprint)
 app.register_blueprint(main_blueprint)
 login_manager.init_app(app=app)
 
+
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template('404.html'), 404
+
+
 if __name__ == "__main__":
-    app.run(host='0.0.0.0')
+    app.run()

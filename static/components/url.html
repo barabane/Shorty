@@ -1,8 +1,20 @@
-<article class="d-flex align-items-center ">{{ url.full_path }} -> <a href="{{ url.short_path }}">{{ url.short_path
-  }}</a>
-  <div class="link_buttons ml-auto">
-    <a href="/url/delete/{{ url.id }}" class="link_button" data-tooltip="Удалить">
-      <svg class="link-button__icon" stroke-width="1.5" viewBox="0 0 24 24" fill="none" stroke-linecap="round"
+<article class="d-flex align-items-center url">
+  <div class="url_body">
+    <p class="url_long">{{ url.full_path }}</p>
+    <a href="{{ url.short_path }}" class="url_short">
+      {{ url.short_path }}
+    </a>
+  </div>
+  <div class="url_buttons ml-auto">
+    <a class="url_button url_button--copy" onclick="copyToClipboard(this)">
+      <svg class="url_button_icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+      </svg>
+    </a>
+    <a href="/url/delete/{{ url.id }}" class="url_button">
+      <svg class="url_button_icon" stroke-width="1.5" viewBox="0 0 24 24" fill="none" stroke-linecap="round"
            stroke-linejoin="round" version="1.1" xmlns="http://www.w3.org/2000/svg"
       >
         <polyline points="3 6 5 6 21 6"/>

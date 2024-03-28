@@ -54,3 +54,44 @@
 .image {
     width: 100px;
 }
+
+.url_body {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%;
+}
+
+.url_long {
+    margin: 0px;
+    width: 90%;
+    font-size: 15px;
+    color: #808080;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.url_short {
+
+}
+
+.url_buttons {
+    display: flex
+}
+
+.url_button {
+    width: 25px;
+}
+
+.url_button:not(:last-child) {
+    margin-right: 5px;
+}
+
+.url_button_icon {
+    width: inherit;
+    stroke: #919191;
+}
+
+.url_button_icon:hover {
+    stroke: #3B3B3B;
+}
